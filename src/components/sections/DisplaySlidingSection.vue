@@ -10,6 +10,8 @@ const screenshots = [
   {
     id: 1,
     title: 'Quick, Secure Login',
+    tag: 'For Users',
+    tagColor: 'pink',
     image: 'src/assets/images/products/login.png',
     description:
       'Sign in with Email, Google, or Facebook — get started in seconds with multiple authentication options',
@@ -17,6 +19,8 @@ const screenshots = [
   {
     id: 2,
     title: 'Beautiful Book Catalog',
+    tag: 'Customer Experience',
+    tagColor: 'green',
     image: 'src/assets/images/products/browse_product.png',
     description:
       'Customers can browse your entire collection with an elegant, easy-to-navigate interface',
@@ -24,6 +28,8 @@ const screenshots = [
   {
     id: 3,
     title: 'Powerful Inventory Management',
+    tag: 'For Sellers',
+    tagColor: 'blue',
     image: 'src/assets/images/products/inventory.png',
     description:
       'Organize your book catalog with real-time stock tracking and bulk management tools',
@@ -31,12 +37,16 @@ const screenshots = [
   {
     id: 4,
     title: 'Easy Book Management',
+    tag: 'For Sellers',
+    tagColor: 'blue',
     image: 'src/assets/images/products/product_delete.png',
     description: 'Effortlessly manage your inventory — remove outdated books with just one click',
   },
   {
     id: 5,
     title: 'Dashboard Analytics',
+    tag: 'For Sellers',
+    tagColor: 'blue',
     image: 'src/assets/images/products/overview.png',
     description:
       'Monitor sales performance, track revenue, and check pending orders with comprehensive analytics',
@@ -44,6 +54,8 @@ const screenshots = [
   {
     id: 6,
     title: 'Real-Time Order Tracking',
+    tag: 'For Sellers',
+    tagColor: 'blue',
     image: 'src/assets/images/products/check_order.png',
     description:
       'See customer orders instantly as they come in — manage, process, and fulfill orders efficiently',
@@ -51,6 +63,8 @@ const screenshots = [
   {
     id: 7,
     title: 'Seamless Shopping Experience',
+    tag: 'Customer Experience',
+    tagColor: 'green',
     image: 'src/assets/images/products/product_main.png',
     description:
       'Customers can add books to cart, view details, and checkout smoothly — driving more sales for you',
@@ -167,9 +181,26 @@ const currentScreenshot = computed(() => screenshots[currentIndex.value] || scre
 
       <!-- Current Interface Info -->
       <div class="text-center mt-12">
-        <h3 class="text-2xl font-bold text-gray-900 mb-3">
-          {{ currentScreenshot?.title || 'Loading...' }}
-        </h3>
+        <div class="flex items-center justify-center gap-3 mb-3">
+          <!-- Tag Badge -->
+          <span
+            class="px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm"
+            :class="[
+              currentScreenshot?.tagColor === 'blue'
+                ? 'bg-blue-500 text-white'
+                : currentScreenshot?.tagColor === 'green'
+                  ? 'bg-emerald-500 text-white'
+                  : 'bg-pink-500 text-white',
+            ]"
+          >
+            {{ currentScreenshot?.tag }}
+          </span>
+          <!-- Title -->
+          <h3 class="text-2xl font-bold text-gray-900">
+            {{ currentScreenshot?.title || 'Loading...' }}
+          </h3>
+        </div>
+        <!-- Description -->
         <p class="text-gray-600 max-w-xl mx-auto">
           {{ currentScreenshot?.description || 'Loading description...' }}
         </p>
