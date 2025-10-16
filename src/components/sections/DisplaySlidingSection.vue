@@ -5,31 +5,55 @@ import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
 // Track the current displayed screenshot index
 const currentIndex = ref(0);
 
-// Screenshot data (each slide item)
+// Screenshot data
 const screenshots = [
   {
     id: 1,
-    title: 'Dashboard Overview',
-    image: 'src/assets/images/products/overview.png',
-    description: 'Comprehensive analytics and insights at your fingertips',
+    title: 'Quick, Secure Login',
+    image: 'src/assets/images/products/login.png',
+    description:
+      'Sign in with Email, Google, or Facebook — get started in seconds with multiple authentication options',
   },
   {
     id: 2,
-    title: 'Advanced Analytics',
+    title: 'Beautiful Book Catalog',
     image: 'src/assets/images/products/browse_product.png',
-    description: 'Deep dive into your data with powerful visualization tools',
+    description:
+      'Customers can browse your entire collection with an elegant, easy-to-navigate interface',
   },
   {
     id: 3,
-    title: 'Team Collaboration',
-    image: 'src/assets/images/products/product_view.png',
-    description: 'Seamless teamwork with real-time collaboration features',
+    title: 'Powerful Inventory Management',
+    image: 'src/assets/images/products/inventory.png',
+    description:
+      'Organize your book catalog with real-time stock tracking and bulk management tools',
   },
   {
     id: 4,
-    title: 'Mobile Experience',
+    title: 'Easy Book Management',
     image: 'src/assets/images/products/product_delete.png',
-    description: 'Perfect responsive design for any device',
+    description: 'Effortlessly manage your inventory — remove outdated books with just one click',
+  },
+  {
+    id: 5,
+    title: 'Dashboard Analytics',
+    image: 'src/assets/images/products/overview.png',
+    description:
+      'Monitor sales performance, track revenue, and check pending orders with comprehensive analytics',
+  },
+  {
+    id: 6,
+    title: 'Real-Time Order Tracking',
+    image: 'src/assets/images/products/check_order.png',
+    description:
+      'See customer orders instantly as they come in — manage, process, and fulfill orders efficiently',
+  },
+  {
+    id: 7,
+    title: 'Seamless Shopping Experience',
+    image: 'src/assets/images/products/product_main.png',
+    description:
+      'Customers can add books to cart, view details, and checkout smoothly — driving more sales for you',
   },
 ];
 
@@ -62,26 +86,26 @@ const currentScreenshot = computed(() => screenshots[currentIndex.value] || scre
 
 <template>
   <section
-    class="relative bg-gradient-to-b from-green-300/20 via-gray-50 to-white py-20 overflow-hidden"
+    class="relative bg-gradient-to-b from-green-200/20 via-gray-50 to-white py-20 overflow-hidden"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
       <div class="text-center mb-16">
         <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
           See It In
-          <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <span class="bg-gradient-to-r from-[#F39F9F] to-purple-800 bg-clip-text text-transparent">
             Action
           </span>
         </h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Explore our product through interactive screenshots and discover the powerful features
-          that make us different.
+          Explore our product through interactive interfaces and discover the powerful features that
+          make us different.
         </p>
       </div>
 
       <!-- 3D Screenshot Slider -->
       <div class="relative">
-        <!-- Perspective container for 3D depth -->
+        <!-- perspective container for 3D depth -->
         <div
           class="relative h-[300px] mx-auto"
           style="perspective: 1000px; perspective-origin: center center"
@@ -101,9 +125,9 @@ const currentScreenshot = computed(() => screenshots[currentIndex.value] || scre
             <!-- Screenshot Card -->
             <div
               class="w-full h-full bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200 hover:shadow-3xl transition-shadow duration-300"
-              :class="index === currentIndex ? 'ring-4 ring-blue-500/20' : ''"
+              :class="index === currentIndex ? 'ring-4 ring-pink-300/20' : ''"
             >
-              <!-- Image inside the card -->
+              <!-- image inside the card -->
               <img
                 :src="screenshot.image"
                 :alt="screenshot.title"
@@ -111,7 +135,7 @@ const currentScreenshot = computed(() => screenshots[currentIndex.value] || scre
                 loading="lazy"
               />
 
-              <!-- Green dot indicator for active image -->
+              <!-- green dot indicator for active image -->
               <div
                 v-if="index === currentIndex"
                 class="absolute top-4 right-4 w-3 h-3 bg-green-500 rounded-full animate-pulse"
@@ -126,7 +150,7 @@ const currentScreenshot = computed(() => screenshots[currentIndex.value] || scre
           @click="previousSlide"
         >
           <ChevronLeft
-            class="w-6 h-6 text-gray-600 group-hover:text-gray-900 transform group-hover:-translate-x-0.5 transition-transform"
+            class="w-6 h-6 text-[#B95E82] group-hover:text-[#a24268] transform group-hover:-translate-x-0.5 transition-transform"
           />
         </button>
 
@@ -136,17 +160,17 @@ const currentScreenshot = computed(() => screenshots[currentIndex.value] || scre
           @click="nextSlide"
         >
           <ChevronRight
-            class="w-6 h-6 text-gray-600 group-hover:text-gray-900 transform group-hover:translate-x-0.5 transition-transform"
+            class="w-6 h-6 text-[#B95E82] group-hover:text-[#a24268] transform group-hover:translate-x-0.5 transition-transform"
           />
         </button>
       </div>
 
-      <!-- Current Screenshot Info -->
+      <!-- Current Interface Info -->
       <div class="text-center mt-12">
-        <h3 class="text-2xl font-bold text-gray-900 mb-2">
+        <h3 class="text-2xl font-bold text-gray-900 mb-3">
           {{ currentScreenshot?.title || 'Loading...' }}
         </h3>
-        <p class="text-gray-600 max-w-2xl mx-auto">
+        <p class="text-gray-600 max-w-xl mx-auto">
           {{ currentScreenshot?.description || 'Loading description...' }}
         </p>
       </div>
@@ -158,9 +182,8 @@ const currentScreenshot = computed(() => screenshots[currentIndex.value] || scre
           :key="screenshot.id"
           :class="[
             'w-3 h-3 rounded-full transition-all duration-200',
-            index === currentIndex ? 'bg-blue-600 scale-125' : 'bg-gray-300 hover:bg-gray-400',
+            index === currentIndex ? 'bg-[#B95E82] scale-125' : 'bg-gray-300 hover:bg-gray-400',
           ]"
-          @click="currentIndex = index"
         ></button>
       </div>
     </div>
@@ -171,10 +194,3 @@ const currentScreenshot = computed(() => screenshots[currentIndex.value] || scre
     ></div>
   </section>
 </template>
-
-<style scoped>
-/* Perspective container for 3D hover depth */
-.perspective-container {
-  perspective: 1000px;
-}
-</style>
