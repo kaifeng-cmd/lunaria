@@ -31,7 +31,7 @@ import CTASection from '@/components/sections/CTASection.vue';
     </section>
 
     <!-- Pricing Preview -->
-    <section id="pricing" class="bg-gray-50">
+    <section id="pricing">
       <PricingPreview />
     </section>
 
@@ -41,7 +41,7 @@ import CTASection from '@/components/sections/CTASection.vue';
     </section>
 
     <!-- Call to Action -->
-    <section id="cta" class="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+    <section id="cta">
       <CTASection />
     </section>
   </div>

@@ -1,30 +1,37 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button';
-import { Check } from 'lucide-vue-next';
+import { Check, X } from 'lucide-vue-next';
 
 const plans = [
   {
     name: 'Starter',
     price: 'Free',
     period: 'forever',
-    description: 'Perfect for trying out our platform',
-    features: ['1 project', '5GB storage', 'Basic support', 'Community access'],
-    notIncluded: ['Advanced analytics', 'Priority support', 'Custom integrations'],
+    description: 'Perfect for trying out and launching your first bookstore',
+    features: [
+      'Limited book listings',
+      'Limited storage & bandwidth',
+      'Basic storefront theme',
+      'Email support',
+      'Real-time analytics dashboard',
+      'Stripe payment processing (escrow)',
+    ],
+    notIncluded: ['Automated inventory sync', 'Custom domain / branding'],
     popular: false,
     cta: 'Get Started',
   },
   {
-    name: 'Professional',
-    price: '$29',
+    name: 'Pro',
+    price: 'RM 99',
     period: 'per month',
-    description: 'Best for growing teams and businesses',
+    description: 'Best for growing bookstores and scaling your business',
     features: [
-      'Unlimited projects',
-      '100GB storage',
-      'Advanced analytics',
-      'Priority support',
-      'Custom integrations',
-      'API access',
+      'Everything in Starter',
+      'Unlimited book listings',
+      'Advanced analytics & reporting dashboard',
+      'Bulk import / export',
+      'Automated inventory sync',
+      'Custom domain / branding',
     ],
     notIncluded: ['White-label solution', 'Dedicated account manager'],
     popular: true,
@@ -34,31 +41,33 @@ const plans = [
     name: 'Enterprise',
     price: 'Custom',
     period: 'contact us',
-    description: 'For large organizations with specific needs',
+    description: 'For large bookstore networks and marketplace operators',
     features: [
-      'Everything in Professional',
-      'Unlimited storage',
+      'Everything in Pro',
+      'Unlimited storage & bandwidth',
       'White-label solution',
       'Dedicated account manager',
+      '24/7 phone & email support',
+      'Advanced storefront theme',
+      'Advanced security & compliance',
       'Custom SLA',
-      'On-premise deployment',
-      'Advanced security',
+      'Priority access to new features',
     ],
     notIncluded: [],
     popular: false,
-    cta: 'Contact Sales',
+    cta: 'Contact Our Sales',
   },
 ];
 </script>
 
 <template>
-  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-[#F5D2D2]">
     <div class="max-w-7xl mx-auto">
       <!-- Section Header -->
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#921A40] mb-6">
           Simple, transparent
-          <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <span class="bg-gradient-to-l from-[#e66d6d] to-[#a32e53] bg-clip-text text-transparent">
             pricing
           </span>
         </h2>
@@ -75,24 +84,35 @@ const plans = [
           :class="[
             'relative bg-white rounded-2xl border-2 p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2',
             plan.popular
-              ? 'border-blue-500 shadow-xl scale-105'
-              : 'border-gray-200 hover:border-blue-300',
+              ? 'border-[#ca7892] border-4 shadow-xl scale-105'
+              : 'border-gray-100 border-4 hover:border-[#daa6b6]',
           ]"
         >
           <!-- Popular Badge -->
           <div
             v-if="plan.popular"
-            class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-semibold"
+            class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#e66d6d] to-purple-500 text-white px-4 py-2 rounded-full text-sm font-semibold"
           >
             Most Popular
           </div>
 
           <!-- Plan Header -->
           <div class="text-center mb-8">
-            <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ plan.name }}</h3>
+            <h3
+              class="text-2xl font-bold mb-2"
+              :class="
+                plan.name === 'Pro'
+                  ? 'bg-gradient-to-r from-[#e66d6d] to-purple-500 bg-clip-text text-transparent'
+                  : plan.name === 'Enterprise'
+                    ? 'bg-gradient-to-r from-[#d52d2d] to-yellow-200 bg-clip-text text-transparent'
+                    : 'text-gray-900'
+              "
+            >
+              {{ plan.name }}
+            </h3>
             <div class="mb-4">
-              <span class="text-4xl font-bold text-gray-900">{{ plan.price }}</span>
-              <span class="text-gray-600 ml-1">{{ plan.period }}</span>
+              <span class="text-3xl font-bold text-gray-900">{{ plan.price }}</span>
+              <span class="text-gray-600 ml-2">{{ plan.period }}</span>
             </div>
             <p class="text-gray-600">{{ plan.description }}</p>
           </div>
@@ -109,12 +129,10 @@ const plans = [
             <div
               v-for="feature in plan.notIncluded"
               :key="feature"
-              class="flex items-center opacity-50"
+              class="flex items-center opacity-60"
             >
-              <div class="w-5 h-5 mr-3 flex-shrink-0 flex items-center justify-center">
-                <div class="w-4 h-0.5 bg-gray-300"></div>
-              </div>
-              <span class="text-gray-400">{{ feature }}</span>
+              <X class="w-5 h-5 text-red-500 mr-3 flex-shrink-0" />
+              <span class="text-gray-500">{{ feature }}</span>
             </div>
           </div>
 
@@ -122,7 +140,13 @@ const plans = [
           <Button
             :variant="plan.popular ? 'default' : 'outline'"
             class="w-full py-3 transition-all duration-200 hover:scale-105"
-            :class="plan.popular ? 'bg-gradient-to-r from-blue-500 to-purple-500 border-0' : ''"
+            :class="
+              plan.popular
+                ? 'bg-gradient-to-r from-[#e66d6d] to-purple-500 border-0'
+                : plan.name === 'Enterprise'
+                  ? 'border-[#d52d2d]/40 border-2 hover:bg-transparent'
+                  : ''
+            "
           >
             {{ plan.cta }}
           </Button>
@@ -130,15 +154,18 @@ const plans = [
       </div>
 
       <!-- Bottom Note -->
-      <div class="text-center mt-12">
-        <p class="text-gray-600 mb-4">
-          All plans include a 14-day free trial. No credit card required.
+      <div class="text-center mt-14">
+        <p class="text-gray-600 font-semibold mb-4">
+          Pro plan includes a 60-days free trial. No credit card required.
         </p>
-        <button
-          class="text-blue-600 hover:text-blue-700 font-semibold hover:underline transition-all duration-200"
+        <Button
+          as="a"
+          href="pricing"
+          variant="link"
+          class="text-[#A94A4A] hover:text-[#822e2e] font-semibold hover:underline transition-all duration-200"
         >
-          Compare all features →
-        </button>
+          Compare all packages →
+        </Button>
       </div>
     </div>
   </section>
