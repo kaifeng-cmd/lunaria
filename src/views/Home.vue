@@ -4,7 +4,9 @@ import ProductSection from '@/components/sections/ProductSection.vue';
 import displaySlidingSection from '@/components/sections/DisplaySlidingSection.vue';
 import FeaturesSection from '@/components/sections/FeaturesSection.vue';
 import PricingPreview from '@/components/sections/PricingPreview.vue';
+import GuideSection from '@/components/sections/GuideSection.vue';
 import TestimonialsSection from '@/components/sections/TestimonialsSection.vue';
+import FAQSection from '@/components/sections/FAQSection.vue';
 import CTASection from '@/components/sections/CTASection.vue';
 </script>
 
@@ -35,9 +37,19 @@ import CTASection from '@/components/sections/CTASection.vue';
       <PricingPreview />
     </section>
 
+    <!-- Guide Section -->
+    <section id="guide">
+      <GuideSection />
+    </section>
+
     <!-- Testimonials -->
     <section id="testimonials">
       <TestimonialsSection />
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <FAQSection />
     </section>
 
     <!-- Call to Action -->
