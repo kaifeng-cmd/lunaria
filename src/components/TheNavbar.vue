@@ -4,6 +4,26 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { Menu, X } from 'lucide-vue-next';
 
+interface NavItem {
+  name: string;
+  href: string;
+  anchor: string | null;
+}
+
+interface LiquidStyle {
+  left: string;
+  width: string;
+  opacity: number;
+}
+
+interface MeteorTrail {
+  show: boolean;
+  startX: number;
+  endX: number;
+  startWidth: number;
+  endWidth: number;
+}
+
 const route = useRoute();
 const isMenuOpen = ref(false);
 const isScrolled = ref(false);
@@ -11,14 +31,14 @@ const isScrolled = ref(false);
 // "Liquid" effect state
 const navContainer = ref<HTMLElement>();
 const isLiquidVisible = ref(false);
-const liquidStyle = ref({
+const liquidStyle = ref<LiquidStyle>({
   left: '0px',
   width: '0px',
   opacity: 0,
 });
 
 // "Meteor trail" effect state
-const meteorTrail = ref({
+const meteorTrail = ref<MeteorTrail>({
   show: false,
   startX: 0,
   endX: 0,
@@ -27,7 +47,7 @@ const meteorTrail = ref({
 });
 
 // Navigation
-const navItems = [
+const navItems: NavItem[] = [
   { name: 'Features', href: '/features', anchor: '#features' },
   { name: 'Pricing', href: '/pricing', anchor: '#pricing' },
   { name: 'Reviews', href: '/reviews', anchor: '#testimonials' },

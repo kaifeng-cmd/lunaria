@@ -2,11 +2,22 @@
 import { ref, computed } from 'vue';
 import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
 
+type TagColor = 'pink' | 'green' | 'blue';
+
+interface Screenshot {
+  id: number;
+  title: string;
+  tag: string;
+  tagColor: TagColor;
+  image: string;
+  description: string;
+}
+
 // Track the current displayed screenshot index
-const currentIndex = ref(0);
+const currentIndex = ref<number>(0);
 
 // Screenshot data
-const screenshots = [
+const screenshots: Screenshot[] = [
   {
     id: 1,
     title: 'Quick, Secure Login',

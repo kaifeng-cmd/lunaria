@@ -2,7 +2,18 @@
 import { Button } from '@/components/ui/button';
 import { Check, X } from 'lucide-vue-next';
 
-const plans = [
+interface Plan {
+  name: string;
+  price: string;
+  period: string;
+  description: string;
+  features: string[];
+  notIncluded: string[];
+  popular: boolean;
+  cta: string;
+}
+
+const plans: Plan[] = [
   {
     name: 'Starter',
     price: 'Free',

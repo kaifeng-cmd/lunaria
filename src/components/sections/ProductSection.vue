@@ -2,14 +2,14 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 // Animation state (controls fade/slide in)
-const isVisible = ref(false);
+const isVisible = ref<boolean>(false);
 const sectionRef = ref<HTMLElement | null>(null);
 
 // Track current feature index
-const currentIndex = ref(0);
+const currentIndex = ref<number>(0);
 
 // Features list
-const features = [
+const features: string[] = [
   'Dashboard Analytics',
   'Inventory Management',
   'Secure Stripe Payment',

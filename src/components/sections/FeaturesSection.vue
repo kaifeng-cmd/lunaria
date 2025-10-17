@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { Zap, ShieldCheck, ChartNoAxesCombined, Users, Headset, Globe } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
+import type { Component } from 'vue';
 
-const features = [
+interface Feature {
+  icon: Component;
+  title: string;
+  description: string;
+}
+
+const features: Feature[] = [
   {
     icon: Zap,
     title: 'Lightning Fast Performance',

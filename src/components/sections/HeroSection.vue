@@ -3,14 +3,14 @@ import { Button } from '@/components/ui/button';
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const heroRef = ref<HTMLElement>();
-const mouseX = ref(50);
-const mouseY = ref(50);
-const showGifs = ref(false);
+const mouseX = ref<number>(50);
+const mouseY = ref<number>(50);
+const showGifs = ref<boolean>(false);
 
 const booksGifUrl = '/assets/books.gif';
 const bookGifUrl = '/assets/book.gif';
 
-const companies = [
+const companies: string[] = [
   'Macrohard',
   'TKL Consulting',
   'Orange',
@@ -242,6 +242,8 @@ onUnmounted(() => {
           </Button>
 
           <Button
+            as="a"
+            href="https://dreamkfeng.wixsite.com/quantumnebuladrifter/portfolio-collections/my-portfolio/real-time-e-commerce-bookstore-with-online-payment"
             variant="outline"
             size="lg"
             class="text-lg px-8 py-4 border-2 border-white/20 text-gray-800 bg-white/10 backdrop-blur-md hover:bg-white/30 hover:scale-105 transition-all duration-200 shadow-lg"

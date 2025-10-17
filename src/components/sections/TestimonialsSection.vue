@@ -1,7 +1,16 @@
 <script setup lang="ts">
 import { Star } from 'lucide-vue-next';
 
-const testimonials = [
+interface Testimonial {
+  name: string;
+  role: string;
+  company: string;
+  avatar: string;
+  rating: number;
+  content: string;
+}
+
+const testimonials: Testimonial[] = [
   {
     name: 'Sarah Chen',
     role: 'CTO',
