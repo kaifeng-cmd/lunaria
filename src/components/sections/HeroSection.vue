@@ -224,7 +224,7 @@ onUnmounted(() => {
 
         <!-- Subtitle -->
         <p
-          class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed animate-slide-up-delay drop-shadow-sm"
+          class="text-md text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed animate-slide-up-delay drop-shadow-sm"
         >
           A next-generation bookstore SaaS that launch your digital bookstore in minutes. Upload
           once, customize store, sell everywhere, and reach readers across the world.

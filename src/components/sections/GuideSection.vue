@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useWindowSize } from '@vueuse/core';
 import { Button } from '@/components/ui/button';
 import {
   BookOpen,
@@ -30,6 +31,9 @@ interface Step {
   description: string;
   icon: Component;
 }
+
+const { width } = useWindowSize();
+const isSmallScreen = computed(() => width.value < 768);
 
 const currentView = ref<ViewType>('seller');
 
@@ -143,11 +147,11 @@ const switchView = (view: ViewType) => {
       </div>
 
       <div class="bg-white/80 rounded-2xl p-8 border border-gray-200">
-        <Stepper class="flex gap-4 w-full">
+        <Stepper :class="['w-full', isSmallScreen ? 'flex flex-col gap-6' : 'flex gap-4']">
           <template v-for="(item, index) in steps" :key="item.step">
             <StepperItem class="flex-1 group" :step="item.step">
               <StepperTrigger class="w-full">
-                <div class="flex flex-col items-start gap-2 w-full">
+                <div class="flex gap-2 w-full flex-col items-start">
                   <StepperIndicator
                     class="flex items-center justify-center w-12 h-12 rounded-full flex-shrink-0"
                   >
@@ -165,7 +169,10 @@ const switchView = (view: ViewType) => {
                 </div>
               </StepperTrigger>
 
-              <StepperSeparator v-if="index !== steps.length - 1" class="w-full h-px" />
+              <StepperSeparator
+                v-if="!isSmallScreen && index !== steps.length - 1"
+                class="w-full h-px"
+              />
             </StepperItem>
           </template>
         </Stepper>
