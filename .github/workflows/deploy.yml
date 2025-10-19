@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
@@ -30,11 +30,12 @@ jobs:
         run: npm run format
 
       - name: Type check with TypeScript
-        run: npx vue-tsc --noEmit
+        run: npm run typecheck
 
       - name: Build
         run: npm run build
 
+      # for my preference only, count for code lines
       - name: Count Lines of Code
         run: |
           npm install -g cloc
