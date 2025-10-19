@@ -44,6 +44,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Add SPA fallback for GitHub Pages
+        run: cp dist/index.html dist/404.html
+
       # for my preference only, count for code lines
       - name: Count Lines of Code
         run: |
