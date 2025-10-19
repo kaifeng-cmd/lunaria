@@ -2,6 +2,15 @@
 import { ref, computed } from 'vue';
 import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
 
+// Import images so Vite includes them in the build production
+import imgLogin from '@/assets/images/products/login.png';
+import imgBrowse from '@/assets/images/products/browse_product.png';
+import imgInventory from '@/assets/images/products/inventory.png';
+import imgDelete from '@/assets/images/products/product_delete.png';
+import imgOverview from '@/assets/images/products/overview.png';
+import imgOrder from '@/assets/images/products/check_order.png';
+import imgProductMain from '@/assets/images/products/product_main.png';
+
 type TagColor = 'pink' | 'green' | 'blue';
 
 interface Screenshot {
@@ -23,7 +32,7 @@ const screenshots: Screenshot[] = [
     title: 'Quick, Secure Login',
     tag: 'For Users',
     tagColor: 'pink',
-    image: 'src/assets/images/products/login.png',
+    image: imgLogin,
     description:
       'Sign in with Email, Google, or Facebook — get started in seconds with multiple authentication options',
   },
@@ -32,7 +41,7 @@ const screenshots: Screenshot[] = [
     title: 'Beautiful Book Catalog',
     tag: 'Customer Experience',
     tagColor: 'green',
-    image: 'src/assets/images/products/browse_product.png',
+    image: imgBrowse,
     description:
       'Customers can browse your entire collection with an elegant, easy-to-navigate interface',
   },
@@ -41,7 +50,7 @@ const screenshots: Screenshot[] = [
     title: 'Powerful Inventory Management',
     tag: 'For Sellers',
     tagColor: 'blue',
-    image: 'src/assets/images/products/inventory.png',
+    image: imgInventory,
     description:
       'Organize your book catalog with real-time stock tracking and bulk management tools',
   },
@@ -50,7 +59,7 @@ const screenshots: Screenshot[] = [
     title: 'Easy Book Management',
     tag: 'For Sellers',
     tagColor: 'blue',
-    image: 'src/assets/images/products/product_delete.png',
+    image: imgDelete,
     description: 'Effortlessly manage your inventory — remove outdated books with just one click',
   },
   {
@@ -58,7 +67,7 @@ const screenshots: Screenshot[] = [
     title: 'Dashboard Analytics',
     tag: 'For Sellers',
     tagColor: 'blue',
-    image: 'src/assets/images/products/overview.png',
+    image: imgOverview,
     description:
       'Monitor sales performance, track revenue, and check pending orders with comprehensive analytics',
   },
@@ -67,7 +76,7 @@ const screenshots: Screenshot[] = [
     title: 'Real-Time Order Tracking',
     tag: 'For Sellers',
     tagColor: 'blue',
-    image: 'src/assets/images/products/check_order.png',
+    image: imgOrder,
     description:
       'See customer orders instantly as they come in — manage, process, and fulfill orders efficiently',
   },
@@ -76,7 +85,7 @@ const screenshots: Screenshot[] = [
     title: 'Seamless Shopping Experience',
     tag: 'Customer Experience',
     tagColor: 'green',
-    image: 'src/assets/images/products/product_main.png',
+    image: imgProductMain,
     description:
       'Customers can add books to cart, view details, and checkout smoothly — driving more sales for you',
   },

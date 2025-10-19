@@ -24,15 +24,15 @@ const footerSections: FooterSection[] = [
     links: [
       { label: 'Features', href: '/features' },
       { label: 'Pricing', href: '/pricing' },
-      { label: 'Security', href: '#' },
-      { label: 'Status', href: '#' },
+      { label: 'Security', href: '/' },
+      { label: 'Status', href: '/' },
     ],
   },
   {
     title: 'Company',
     links: [
       { label: 'About Us', href: '/about' },
-      { label: 'Careers', href: '#' },
+      { label: 'Careers', href: '/' },
       { label: 'Blog', href: '/blog' },
       { label: 'Contact', href: '/contact' },
     ],
@@ -40,18 +40,18 @@ const footerSections: FooterSection[] = [
   {
     title: 'Resources',
     links: [
-      { label: 'Documentation', href: '#' },
-      { label: 'Community', href: '#' },
-      { label: 'FAQ', href: '/reviews' },
+      { label: 'Documentation', href: '/' },
+      { label: 'Community', href: '/' },
+      { label: 'Forum', href: '/' },
     ],
   },
   {
     title: 'Legal',
     links: [
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms of Service', href: '#' },
-      { label: 'Cookie Policy', href: '#' },
-      { label: 'License', href: '#' },
+      { label: 'Privacy Policy', href: '/' },
+      { label: 'Terms of Service', href: '/' },
+      { label: 'Cookie Policy', href: '/' },
+      { label: 'License', href: '/' },
     ],
   },
 ];
@@ -78,12 +78,22 @@ const socialLinks: SocialLink[] = [
           </h4>
           <ul class="space-y-2">
             <li v-for="link in section.links" :key="link.label">
-              <a
-                :href="link.href"
-                class="text-sm text-gray-400 hover:text-white transition-colors duration-200"
-              >
-                {{ link.label }}
-              </a>
+              <template v-if="link.href.startsWith('/')">
+                <RouterLink
+                  :to="link.href"
+                  class="text-sm text-gray-400 hover:text-white transition-colors duration-200"
+                >
+                  {{ link.label }}
+                </RouterLink>
+              </template>
+              <template v-else>
+                <a
+                  :href="link.href"
+                  class="text-sm text-gray-400 hover:text-white transition-colors duration-200"
+                >
+                  {{ link.label }}
+                </a>
+              </template>
             </li>
           </ul>
         </div>

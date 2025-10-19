@@ -7,8 +7,8 @@ const mouseX = ref<number>(50);
 const mouseY = ref<number>(50);
 const showGifs = ref<boolean>(false);
 
-const booksGifUrl = '/assets/books.gif';
-const bookGifUrl = '/assets/book.gif';
+const booksGifUrl = `${import.meta.env.BASE_URL}assets/books.gif`;
+const bookGifUrl = `${import.meta.env.BASE_URL}assets/book.gif`;
 
 const companies: string[] = [
   'Macrohard',
