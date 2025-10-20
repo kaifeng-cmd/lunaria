@@ -103,7 +103,7 @@ const features: Feature[] = [
         <p class="text-gray-600 mb-4">Ready to experience the difference?</p>
         <Button
           as="a"
-          href="/features"
+          href="features"
           variant="link"
           class="text-[#B95E82] hover:text-[#a43763] font-semibold hover:underline transition-all duration-200"
         >

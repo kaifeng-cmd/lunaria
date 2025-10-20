@@ -120,11 +120,11 @@ const currentScreenshot = computed(() => screenshots[currentIndex.value] || scre
 
 <template>
   <section
-    class="relative bg-gradient-to-b from-green-200/20 via-gray-50 to-white py-20 overflow-hidden"
+    class="relative bg-gradient-to-b from-green-200/20 via-gray-50 to-white py-20 overflow-hidden overflow-x-hidden"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
-      <div class="text-center mb-16">
+      <div class="text-center mb-14">
         <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
           See It In
           <span class="bg-gradient-to-r from-[#F39F9F] to-purple-800 bg-clip-text text-transparent">
@@ -141,14 +141,14 @@ const currentScreenshot = computed(() => screenshots[currentIndex.value] || scre
       <div class="relative">
         <!-- perspective container for 3D depth -->
         <div
-          class="relative h-[300px] mx-auto"
+          class="relative h-[220px] sm:h-[300px] md:h-[360px] mx-auto"
           style="perspective: 1000px; perspective-origin: center center"
         >
           <!-- Loop through screenshots -->
           <div
             v-for="(screenshot, index) in screenshots"
             :key="screenshot.id"
-            class="absolute top-1/2 left-1/2 w-[600px] h-auto cursor-pointer transition-all duration-700 ease-out"
+            class="absolute top-1/2 left-1/2 w-[300px] sm:w-[420px] lg:w-[600px] h-auto cursor-pointer transition-all duration-700 ease-out"
             :style="{
               transform: `translate(-50%, -50%) ${getSlideStyle(index).transform}`,
               opacity: getSlideStyle(index).opacity,
@@ -200,7 +200,7 @@ const currentScreenshot = computed(() => screenshots[currentIndex.value] || scre
       </div>
 
       <!-- Current Interface Info -->
-      <div class="text-center mt-12">
+      <div class="text-center mt-10">
         <div class="flex items-center justify-center gap-3 mb-3">
           <!-- Tag Badge -->
           <span

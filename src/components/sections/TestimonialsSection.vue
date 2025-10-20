@@ -104,7 +104,7 @@ const testimonials: Testimonial[] = [
       <div class="text-center mt-6">
         <Button
           as="a"
-          href="/reviews"
+          href="reviews"
           variant="link"
           class="text-[#B95E82] hover:text-[#a43763] font-semibold hover:underline transition-all duration-200"
         >

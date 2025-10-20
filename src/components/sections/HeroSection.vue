@@ -68,7 +68,7 @@ onUnmounted(() => {
   <section
     ref="heroRef"
     class="relative flex items-center justify-center px-4 sm:px-6 lg:px-8 cursor-none"
-    style="min-height: 100vh; max-height: 100vh"
+    style="min-height: 100vh"
   >
     <!-- light gradient background-->
     <div class="absolute inset-0 overflow-hidden">
@@ -156,7 +156,7 @@ onUnmounted(() => {
     <!-- GIF decoration -->
     <div
       v-show="showGifs"
-      class="absolute hidden md:block bottom-16 left-5 pointer-events-none transition-opacity duration-200 ease-in-out z-30"
+      class="absolute hidden lg:block bottom-16 left-5 pointer-events-none transition-opacity duration-200 ease-in-out z-30"
       :class="showGifs ? 'opacity-100' : 'opacity-0'"
     >
       <!-- books.gif -->
@@ -202,7 +202,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="relative max-w-7xl mx-auto text-center" style="z-index: 20">
+    <div class="relative max-w-sm md:max-w-xl lg:max-w-7xl mx-auto text-center" style="z-index: 20">
       <div class="max-w-4xl mx-auto">
         <!-- Badge -->
         <div
@@ -224,7 +224,7 @@ onUnmounted(() => {
 
         <!-- Subtitle -->
         <p
-          class="text-md text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed animate-slide-up-delay drop-shadow-sm"
+          class="text-md text-gray-600 mb-10 max-w-sm md:max-w-2xl mx-auto leading-relaxed animate-slide-up-delay drop-shadow-sm"
         >
           A next-generation bookstore SaaS that launch your digital bookstore in minutes. Upload
           once, customize store, sell everywhere, and reach readers across the world.
