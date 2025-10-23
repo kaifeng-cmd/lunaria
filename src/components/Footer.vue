@@ -129,11 +129,11 @@ const socialLinks: SocialLink[] = [
 
       <!-- Bottom Links -->
       <div class="flex flex-col sm:flex-row sm:justify-center gap-3 text-xs text-gray-400">
-        <a href="/" class="hover:text-white transition-colors">Privacy</a>
+        <a href="#" class="hover:text-white transition-colors">Privacy</a>
         <span class="hidden sm:inline">•</span>
-        <a href="/" class="hover:text-white transition-colors">Terms</a>
+        <a href="#" class="hover:text-white transition-colors">Terms</a>
         <span class="hidden sm:inline">•</span>
-        <a href="/" class="hover:text-white transition-colors">Cookies</a>
+        <a href="#" class="hover:text-white transition-colors">Cookies</a>
       </div>
     </div>
   </footer>
