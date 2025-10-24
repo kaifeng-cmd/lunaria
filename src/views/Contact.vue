@@ -216,7 +216,7 @@ const handleSubmit = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  class="w-[40%] px-2 py-4 flex items-center justify-center bg-gradient-to-r from-pink-400 to-purple-600 text-white hover:opacity-90"
+                  class="w-full sm:w-[60%] md:w-[40%] px-2 py-4 flex items-center justify-center bg-gradient-to-r from-pink-400 to-purple-600 text-white hover:opacity-90 hover:scale-105 transition-all duration-200"
                 >
                   <Send class="w-4 h-4" />
                   Send Message
