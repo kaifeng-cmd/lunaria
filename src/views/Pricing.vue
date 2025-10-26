@@ -2,13 +2,14 @@
 import { ref } from 'vue';
 import { Button } from '@/components/ui/button';
 import ComparisonTable from '@/components/ComparisonTable.vue';
-import { Check, Sparkles, Zap, Crown, TrendingUp } from 'lucide-vue-next';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import { Check, X, Ghost, Citrus, Crown, TrendingUp } from 'lucide-vue-next';
 import type { Component } from 'vue';
-
-interface PricingFeature {
-  text: string;
-  included: boolean;
-}
 
 interface PricingPlan {
   name: string;
@@ -16,10 +17,16 @@ interface PricingPlan {
   price: string;
   period: string;
   description: string;
-  features: PricingFeature[];
+  features: string[];
+  notIncluded: string[];
   popular?: boolean;
   buttonText: string;
-  buttonVariant: 'default' | 'outline';
+}
+
+interface AccordionItemType {
+  value: string;
+  question: string;
+  answer: string;
 }
 
 const billingCycle = ref<'monthly' | 'annually'>('monthly');
@@ -27,106 +34,111 @@ const billingCycle = ref<'monthly' | 'annually'>('monthly');
 const plans: PricingPlan[] = [
   {
     name: 'Starter',
-    icon: Sparkles,
-    price: billingCycle.value === 'monthly' ? '$0' : '$0',
+    icon: Ghost,
+    price: 'Free',
     period: 'forever',
-    description: 'Perfect for getting started with your online bookstore',
+    description: 'Perfect for trying out and launching your first bookstore',
     features: [
-      { text: 'Up to 100 books', included: true },
-      { text: 'Basic analytics', included: true },
-      { text: 'Email support', included: true },
-      { text: 'Mobile responsive', included: true },
-      { text: 'Stripe payment integration', included: true },
-      { text: 'Advanced features', included: false },
-      { text: 'Priority support', included: false },
-      { text: 'Custom domain', included: false },
+      'Limited book listings',
+      'Limited storage & bandwidth',
+      'Basic storefront theme',
+      'Email support',
+      'Real-time analytics dashboard',
+      'Stripe payment processing (escrow)',
     ],
-    buttonText: 'Start Free',
-    buttonVariant: 'outline',
+    notIncluded: ['Automated inventory sync', 'Custom domain / branding'],
+    popular: false,
+    buttonText: 'Get Started',
   },
   {
-    name: 'Professional',
-    icon: Zap,
-    price: billingCycle.value === 'monthly' ? '$29' : '$290',
-    period: billingCycle.value === 'monthly' ? '/month' : '/year',
-    description: 'For growing bookstores ready to scale',
+    name: 'Pro',
+    icon: Citrus,
+    price: 'RM 99',
+    period: 'per month',
+    description: 'Best for growing bookstores and scaling your business',
     features: [
-      { text: 'Unlimited books', included: true },
-      { text: 'Advanced analytics & reports', included: true },
-      { text: 'Priority email & chat support', included: true },
-      { text: 'Custom domain', included: true },
-      { text: 'SEO optimization', included: true },
-      { text: 'Bulk import/export', included: true },
-      { text: 'Marketing tools', included: true },
-      { text: 'API access', included: false },
+      'Everything in Starter',
+      'Unlimited book listings',
+      'Advanced analytics & reporting dashboard',
+      'Bulk import / export',
+      'Automated inventory sync',
+      'Custom domain / branding',
     ],
+    notIncluded: ['White-label solution', 'Dedicated account manager'],
     popular: true,
-    buttonText: 'Start 60-Day Trial',
-    buttonVariant: 'default',
+    buttonText: 'Start Free Trial',
   },
   {
     name: 'Enterprise',
     icon: Crown,
     price: 'Custom',
-    period: 'pricing',
-    description: 'For large organizations with custom needs',
+    period: 'contact us',
+    description: 'For large bookstore networks and marketplace operators',
     features: [
-      { text: 'Everything in Professional', included: true },
-      { text: 'Dedicated account manager', included: true },
-      { text: '24/7 phone support', included: true },
-      { text: 'Custom integrations', included: true },
-      { text: 'Full API access', included: true },
-      { text: 'White-label options', included: true },
-      { text: 'SLA guarantee', included: true },
-      { text: 'On-premise deployment', included: true },
+      'Everything in Pro',
+      'Unlimited storage & bandwidth',
+      'White-label solution',
+      'Dedicated account manager',
+      '24/7 phone & email support',
+      'Advanced storefront theme',
+      'Advanced security & compliance',
+      'Custom SLA',
+      'Priority access to new features',
     ],
-    buttonText: 'Contact Sales',
-    buttonVariant: 'outline',
+    notIncluded: [],
+    popular: false,
+    buttonText: 'Contact Our Sales',
   },
 ];
 
-const faqs = [
+const faqs: AccordionItemType[] = [
   {
+    value: 'item-1',
     question: 'Can I change plans anytime?',
     answer:
       "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any charges.",
   },
   {
+    value: 'item-2',
     question: 'Is there a free trial?',
-    answer:
-      'Yes, the Professional plan comes with a 60-day free trial. No credit card required to start.',
+    answer: 'Yes, the Pro plan comes with a 60-days free trial. No credit card required to start.',
   },
   {
+    value: 'item-3',
     question: 'What payment methods do you accept?',
     answer:
       'We accept all major credit cards (Visa, Mastercard, Amex) and PayPal. Enterprise customers can also pay via invoice.',
   },
   {
+    value: 'item-4',
     question: 'Do you offer refunds?',
     answer:
-      "Yes, we offer a 30-day money-back guarantee. If you're not satisfied, contact us for a full refund.",
+      "Yes, we offer a 30-days money-back guarantee. If you're not satisfied, contact us for a full refund.",
   },
   {
+    value: 'item-5',
     question: 'Is my data secure?',
     answer:
       'Absolutely. We use bank-grade encryption and are PCI DSS compliant. Your data is backed up daily and stored securely.',
   },
 ];
 
-// 对比表格数据配置
+const defaultFaqValue = ref<string>('item-1');
+
+// Comparison Table Data
 const comparisonTableData = {
   columns: [
     { key: 'feature', label: 'Feature', align: 'left' as const },
     { key: 'starter', label: 'Starter', align: 'center' as const },
-    { key: 'professional', label: 'Professional', align: 'center' as const },
+    { key: 'pro', label: 'Pro', align: 'center' as const },
     { key: 'enterprise', label: 'Enterprise', align: 'center' as const },
   ],
   rows: [
     {
       label: 'Number of Books',
       values: {
-        starter: '100',
-        professional: 'Unlimited',
+        starter: '150',
+        pro: 'Unlimited',
         enterprise: 'Unlimited',
       },
     },
@@ -134,15 +146,15 @@ const comparisonTableData = {
       label: 'Storage',
       values: {
         starter: '1 GB',
-        professional: '50 GB',
+        pro: '50 GB',
         enterprise: 'Unlimited',
       },
     },
     {
-      label: 'Team Members',
+      label: 'Max Team Members',
       values: {
         starter: '1',
-        professional: '5',
+        pro: '10',
         enterprise: 'Unlimited',
       },
     },
@@ -150,8 +162,8 @@ const comparisonTableData = {
       label: 'Support',
       values: {
         starter: 'Email',
-        professional: 'Email + Chat',
-        enterprise: '24/7 Phone',
+        pro: 'Email + Phone',
+        enterprise: '24/7 Email + Phone',
       },
     },
   ],
@@ -160,27 +172,27 @@ const comparisonTableData = {
 
 <template>
   <div class="pt-16 min-h-screen bg-gradient-to-b from-purple-50 via-white to-pink-50">
-    <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-purple-600 to-pink-500 py-20">
+    <!-- First Section -->
+    <div class="bg-gradient-to-r from-[#F39F9F] to-purple-900 py-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div
           class="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white text-sm font-medium mb-6"
         >
           <TrendingUp class="w-4 h-4 mr-2" />
-          Simple, Transparent Pricing
+          Flexible Pricing Options
         </div>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-          Choose the Perfect Plan for Your Bookstore
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+          Choose Your Perfect Plan
         </h1>
-        <p class="text-xl text-purple-100 max-w-3xl mx-auto mb-8">
-          Start free, scale as you grow. All plans include core features with no hidden fees.
+        <p class="text-xl text-white max-w-2xl mx-auto leading-tight mb-6">
+          Transparent pricing that grows with your business. No hidden fees, cancel anytime.
         </p>
 
         <!-- Billing Toggle -->
         <div class="flex items-center justify-center gap-4 mt-8">
           <span
             class="text-white font-medium"
-            :class="billingCycle === 'monthly' ? 'opacity-100' : 'opacity-60'"
+            :class="billingCycle === 'monthly' ? 'opacity-100' : 'opacity-50'"
           >
             Monthly
           </span>
@@ -195,40 +207,46 @@ const comparisonTableData = {
           </button>
           <span
             class="text-white font-medium"
-            :class="billingCycle === 'annually' ? 'opacity-100' : 'opacity-60'"
+            :class="billingCycle === 'annually' ? 'opacity-100' : 'opacity-50'"
           >
             Annually
-            <span class="text-sm text-green-200">(Save 17%)</span>
+            <span class="text-sm text-green-300">(Save 17%)</span>
           </span>
         </div>
       </div>
     </div>
 
-    <!-- Pricing Cards -->
+    <!-- Pricing Plan Cards -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <div
           v-for="plan in plans"
           :key="plan.name"
-          class="relative bg-white rounded-2xl border-2 p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
-          :class="
+          :class="[
+            'relative bg-white rounded-2xl border-2 p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2',
             plan.popular
-              ? 'border-pink-500 shadow-xl scale-105 md:scale-110'
-              : 'border-gray-200 hover:border-pink-300'
-          "
+              ? 'border-[#ca7892] border-4 shadow-xl scale-105'
+              : 'border-gray-100 border-4 hover:border-[#daa6b6]',
+          ]"
         >
           <!-- Popular Badge -->
           <div
             v-if="plan.popular"
-            class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-sm font-semibold rounded-full"
+            class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#e66d6d] to-purple-500 text-white px-4 py-2 rounded-full text-sm font-semibold"
           >
             Most Popular
           </div>
 
-          <!-- Icon -->
+          <!-- Icon Badge -->
           <div
-            class="flex items-center justify-center w-14 h-14 rounded-2xl mb-6"
-            :class="plan.popular ? 'bg-gradient-to-r from-pink-500 to-purple-600' : 'bg-gray-100'"
+            class="flex items-center justify-center w-12 h-12 rounded-2xl mb-2"
+            :class="
+              plan.popular
+                ? 'bg-gradient-to-r from-[#e66d6d] to-purple-500'
+                : plan.name === 'Enterprise'
+                  ? 'bg-gradient-to-r from-[#e66d6d] to-yellow-200'
+                  : 'bg-purple-200'
+            "
           >
             <component
               :is="plan.icon"
@@ -237,92 +255,131 @@ const comparisonTableData = {
             />
           </div>
 
-          <!-- Plan Name & Price -->
-          <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ plan.name }}</h3>
-          <div class="mb-4">
-            <span class="text-4xl font-bold text-gray-900">{{ plan.price }}</span>
-            <span class="text-gray-600">{{ plan.period }}</span>
+          <!-- Plan Header -->
+          <div class="mb-8">
+            <h3
+              class="text-2xl font-bold mb-4"
+              :class="
+                plan.name === 'Pro'
+                  ? 'bg-gradient-to-r from-[#e66d6d] to-purple-500 bg-clip-text text-transparent'
+                  : plan.name === 'Enterprise'
+                    ? 'bg-gradient-to-r from-[#d52d2d] to-yellow-200 bg-clip-text text-transparent'
+                    : 'text-gray-600'
+              "
+            >
+              {{ plan.name }}
+            </h3>
+            <div class="mb-4">
+              <span class="text-3xl font-bold text-gray-900">{{ plan.price }}</span>
+              <span class="text-gray-600 ml-2">{{ plan.period }}</span>
+            </div>
+            <p class="text-gray-600">{{ plan.description }}</p>
           </div>
-          <p class="text-gray-600 mb-8">{{ plan.description }}</p>
+
+          <!-- Features List -->
+          <div class="space-y-3 mb-8">
+            <!-- Included Features -->
+            <div v-for="feature in plan.features" :key="feature" class="flex items-center">
+              <Check class="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+              <span class="text-gray-700">{{ feature }}</span>
+            </div>
+
+            <!-- Not Included Features -->
+            <div
+              v-for="feature in plan.notIncluded"
+              :key="feature"
+              class="flex items-center opacity-60"
+            >
+              <X class="w-5 h-5 text-red-500 mr-3 flex-shrink-0" />
+              <span class="text-gray-500">{{ feature }}</span>
+            </div>
+          </div>
 
           <!-- CTA Button -->
           <Button
             :variant="plan.popular ? 'default' : 'outline'"
-            class="w-full mb-8"
+            class="w-full py-3 transition-all duration-200 hover:scale-105"
             :class="
               plan.popular
-                ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:opacity-90'
-                : 'border-2 border-pink-300 hover:bg-pink-50'
+                ? 'bg-gradient-to-r from-[#e66d6d] to-purple-500 border-0'
+                : plan.name === 'Enterprise'
+                  ? 'border-[#d52d2d]/40 border-2 hover:bg-transparent'
+                  : ''
             "
           >
             {{ plan.buttonText }}
           </Button>
-
-          <!-- Features List -->
-          <ul class="space-y-3">
-            <li v-for="feature in plan.features" :key="feature.text" class="flex items-start gap-3">
-              <Check
-                class="w-5 h-5 flex-shrink-0 mt-0.5"
-                :class="feature.included ? 'text-green-500' : 'text-gray-300'"
-              />
-              <span :class="feature.included ? 'text-gray-700' : 'text-gray-400'">
-                {{ feature.text }}
-              </span>
-            </li>
-          </ul>
         </div>
+      </div>
+
+      <!-- Bottom Note -->
+      <div class="text-center mt-14">
+        <p class="text-gray-600 font-semibold">
+          Pro plan includes a 60-days free trial. No credit card required.
+        </p>
       </div>
     </div>
 
     <!-- Feature Comparison Table -->
-    <div class="bg-gray-50 py-20">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Compare All Features</h2>
-          <p class="text-xl text-gray-600">See what's included in each plan</p>
+    <div class="bg-red-100 py-20">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2
+            class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#fc8d8d] to-red-700 bg-clip-text text-transparent mb-4"
+          >
+            Compare Between Plans
+          </h2>
+          <p class="text-xl text-gray-600">
+            See what's included in each plan. Find the one that fits your needs.
+          </p>
         </div>
 
-        <!-- 使用 ComparisonTable 组件 -->
         <ComparisonTable
           :columns="comparisonTableData.columns"
           :rows="comparisonTableData.rows"
-          highlight-column="professional"
+          highlight-column="pro"
         />
       </div>
     </div>
 
-    <!-- FAQ Section -->
-    <div class="py-20">
+    <!-- Pricing FAQ Section -->
+    <div class="py-16 bg-[#e7c2e5]">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Frequently Asked Questions
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Frequently asked
+            <span class="text-white bg-gradient-to-r from-[#f9c2a4] to-purple-900 px-2">
+              questions
+            </span>
           </h2>
-          <p class="text-xl text-gray-600">Everything you need to know about our pricing</p>
+          <p class="text-[#b74e78]">Everything you need to know about our pricing.</p>
         </div>
 
-        <div class="space-y-6">
-          <div
-            v-for="faq in faqs"
-            :key="faq.question"
-            class="bg-white rounded-xl p-6 border-2 border-gray-200 hover:border-pink-300 transition-colors"
-          >
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ faq.question }}</h3>
-            <p class="text-gray-600">{{ faq.answer }}</p>
-          </div>
-        </div>
+        <Accordion type="single" class="w-full" collapsible :default-value="defaultFaqValue">
+          <AccordionItem v-for="faq in faqs" :key="faq.value" :value="faq.value">
+            <AccordionTrigger class="text-left font-medium py-4">
+              {{ faq.question }}
+            </AccordionTrigger>
+            <AccordionContent class="text-sm text-gray-600 pb-4">
+              {{ faq.answer }}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
     </div>
 
     <!-- CTA Section -->
-    <div class="bg-gradient-to-r from-pink-500 to-purple-600 py-16">
+    <div class="bg-gradient-to-r from-purple-100 to-pink-100 py-16">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to get started?</h2>
-        <p class="text-xl text-pink-100 mb-8">
-          Join thousands of bookstores already using our platform
+        <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">Ready to move forward?</h2>
+        <p class="text-xl text-gray-600 mb-8">
+          Unlock the advanced features by upgrading to a PRO plan today!
         </p>
-        <Button size="lg" class="bg-white text-purple-600 hover:bg-gray-100 font-semibold px-8">
-          Start Your Free Trial
+        <Button
+          size="lg"
+          class="bg-white text-purple-600 shadow-md hover:bg-gray-100 hover:scale-105 font-semibold px-6 transition-all duration-200"
+        >
+          Upgrade to PRO
         </Button>
       </div>
     </div>

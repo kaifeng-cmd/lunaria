@@ -284,7 +284,7 @@ const comparisonTableData = {
 
     <!-- Feature Comparison Section -->
     <div class="bg-pink-300/40 py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl font-bold text-pink-600 mb-6">
             How are we different from others?
