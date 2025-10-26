@@ -295,46 +295,48 @@ const stats: Stat[] = [
     </div>
 
     <!-- Trust Badges -->
-    <div class="max-w-6xl mx-auto bg-gradient-to-br from-pink-200 to-purple-300 rounded-3xl py-10">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-purple-900 mb-4">Trusted by Industry Leaders</h2>
-          <p class="text-xl text-gray-600">
-            Featured in leading publications and recognized by industry experts.
-          </p>
-        </div>
+    <div class="py-10">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-br from-pink-100 to-purple-300 rounded-3xl py-10 px-6 sm:px-10">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-purple-900 mb-4">Trusted by Industry Leaders</h2>
+            <p class="text-xl text-gray-600">
+              Featured in leading publications and recognized by industry experts.
+            </p>
+          </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div
-            class="flex items-center justify-center bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
-          >
-            <div class="text-3xl">📰</div>
-            <span class="ml-3 text-xl font-bold text-gray-700">TechCrunch</span>
-          </div>
-          <div
-            class="flex items-center justify-center bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
-          >
-            <div class="text-3xl">🏆</div>
-            <span class="ml-3 text-xl font-bold text-gray-700">Best SaaS 2024 (MY)</span>
-          </div>
-          <div
-            class="flex items-center justify-center bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
-          >
-            <div class="text-3xl">🦄</div>
-            <span class="ml-3 text-xl font-bold text-gray-700">GRC CEO</span>
-          </div>
-          <div
-            class="flex items-center justify-center bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
-          >
-            <div class="text-3xl">💎</div>
-            <span class="ml-3 text-xl font-bold text-gray-700">Capterra</span>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div
+              class="flex items-center justify-center bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
+            >
+              <div class="text-3xl">📰</div>
+              <span class="ml-3 text-xl font-bold text-gray-700">TechCrunch</span>
+            </div>
+            <div
+              class="flex items-center justify-center bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
+            >
+              <div class="text-3xl">🏆</div>
+              <span class="ml-3 text-xl font-bold text-gray-700">Best SaaS 2024 (MY)</span>
+            </div>
+            <div
+              class="flex items-center justify-center bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
+            >
+              <div class="text-3xl">🦄</div>
+              <span class="ml-3 text-xl font-bold text-gray-700">GRC CEO</span>
+            </div>
+            <div
+              class="flex items-center justify-center bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
+            >
+              <div class="text-3xl">💎</div>
+              <span class="ml-3 text-xl font-bold text-gray-700">Capterra</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- CTA Section -->
-    <div class="py-20">
+    <div class="py-14">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
           Join These Happy Customers
