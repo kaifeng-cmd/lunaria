@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Button } from '@/components/ui/button';
+import ComparisonTable from '@/components/ComparisonTable.vue';
 import { Check, Sparkles, Zap, Crown, TrendingUp } from 'lucide-vue-next';
 import type { Component } from 'vue';
 
@@ -111,6 +112,50 @@ const faqs = [
       'Absolutely. We use bank-grade encryption and are PCI DSS compliant. Your data is backed up daily and stored securely.',
   },
 ];
+
+// 对比表格数据配置
+const comparisonTableData = {
+  columns: [
+    { key: 'feature', label: 'Feature', align: 'left' as const },
+    { key: 'starter', label: 'Starter', align: 'center' as const },
+    { key: 'professional', label: 'Professional', align: 'center' as const },
+    { key: 'enterprise', label: 'Enterprise', align: 'center' as const },
+  ],
+  rows: [
+    {
+      label: 'Number of Books',
+      values: {
+        starter: '100',
+        professional: 'Unlimited',
+        enterprise: 'Unlimited',
+      },
+    },
+    {
+      label: 'Storage',
+      values: {
+        starter: '1 GB',
+        professional: '50 GB',
+        enterprise: 'Unlimited',
+      },
+    },
+    {
+      label: 'Team Members',
+      values: {
+        starter: '1',
+        professional: '5',
+        enterprise: 'Unlimited',
+      },
+    },
+    {
+      label: 'Support',
+      values: {
+        starter: 'Email',
+        professional: 'Email + Chat',
+        enterprise: '24/7 Phone',
+      },
+    },
+  ],
+};
 </script>
 
 <template>
@@ -237,46 +282,12 @@ const faqs = [
           <p class="text-xl text-gray-600">See what's included in each plan</p>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div class="overflow-x-auto">
-            <table class="w-full">
-              <thead class="bg-gradient-to-r from-purple-600 to-pink-500 text-white">
-                <tr>
-                  <th class="px-6 py-4 text-left">Feature</th>
-                  <th class="px-6 py-4 text-center">Starter</th>
-                  <th class="px-6 py-4 text-center">Professional</th>
-                  <th class="px-6 py-4 text-center">Enterprise</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-200">
-                <tr>
-                  <td class="px-6 py-4 font-medium">Number of Books</td>
-                  <td class="px-6 py-4 text-center">100</td>
-                  <td class="px-6 py-4 text-center">Unlimited</td>
-                  <td class="px-6 py-4 text-center">Unlimited</td>
-                </tr>
-                <tr class="bg-gray-50">
-                  <td class="px-6 py-4 font-medium">Storage</td>
-                  <td class="px-6 py-4 text-center">1 GB</td>
-                  <td class="px-6 py-4 text-center">50 GB</td>
-                  <td class="px-6 py-4 text-center">Unlimited</td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 font-medium">Team Members</td>
-                  <td class="px-6 py-4 text-center">1</td>
-                  <td class="px-6 py-4 text-center">5</td>
-                  <td class="px-6 py-4 text-center">Unlimited</td>
-                </tr>
-                <tr class="bg-gray-50">
-                  <td class="px-6 py-4 font-medium">Support</td>
-                  <td class="px-6 py-4 text-center">Email</td>
-                  <td class="px-6 py-4 text-center">Email + Chat</td>
-                  <td class="px-6 py-4 text-center">24/7 Phone</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <!-- 使用 ComparisonTable 组件 -->
+        <ComparisonTable
+          :columns="comparisonTableData.columns"
+          :rows="comparisonTableData.rows"
+          highlight-column="professional"
+        />
       </div>
     </div>
 
