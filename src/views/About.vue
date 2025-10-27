@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button';
+import ComicStorySection from '@/components/sections/ComicStorySection.vue';
 import { Heart, Target, Telescope, Users, BookOpenText, Route } from 'lucide-vue-next';
 import type { Component } from 'vue';
 
@@ -261,6 +262,9 @@ const stats: Stats[] = [
         </div>
       </div>
     </div>
+
+    <!-- Comic Story Section -->
+    <ComicStorySection />
 
     <!-- Team Section -->
     <div class="bg-gradient-to-b from-gray-50 to-white py-20">

@@ -4,6 +4,7 @@ import { Star, Quote, ThumbsUp, Users, Award } from 'lucide-vue-next';
 import light from '@/assets/images/illustrations/light.png';
 import { Button } from '@/components/ui/button';
 import type { Component } from 'vue';
+import type { Rating } from '@/types/rating';
 
 interface Review {
   id: number;
@@ -11,7 +12,7 @@ interface Review {
   role: string;
   company: string;
   avatar: string;
-  rating: number;
+  rating: Rating;
   title: string;
   content: string;
   date: Date;

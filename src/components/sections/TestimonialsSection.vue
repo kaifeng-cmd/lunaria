@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-vue-next';
+import type { Rating } from '@/types/rating';
 
 interface Testimonial {
   name: string;
   role: string;
   company: string;
   avatar: string;
-  rating: 1 | 2 | 3 | 4 | 5;
+  rating: Rating;
   content: string;
 }
 
